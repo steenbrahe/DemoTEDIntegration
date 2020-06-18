@@ -17,7 +17,7 @@
           <xadb2tst-exp-message />
           <xadb2tst-exp-table>
             <xadb2tst-exp-id />
-            <xadb2tst-exp-firstname expected="Jens" />
+            <xadb2tst-exp-firstname expected="Jens1" />
             <xadb2tst-exp-lastname expected="Jensen" />
             <xadb2tst-exp-cprnr />
             <xadb2tst-exp-tstmp />
