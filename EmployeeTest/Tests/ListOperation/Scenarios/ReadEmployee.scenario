@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XaUnit xmlns="http://www.xact.dk/xatester/v/1" xmlns:data="http://www.xact.dk/xatester/data/v/1" componentNameUnderTest="XADB2TST">
+<XaUnit xmlns="http://www.xact.dk/xatester/v/1" xmlns:data="http://www.xact.dk/xatester/data/v/1" componentNameUnderTest="xadb2tst">
   <Test>
-    <EnterpriseData host="192.168.96.130" port="16196" repository="&lt;Local Repository&gt;" specification="LoadEmployeesCICS" specificationtype="LOAD" enginecompatibilitytype="RDX" description="Load employees into db2" />
     <Component label="XADB2TST" moduleName="XADB2TST" programExitVerify="value &lt; 8" rollback="false">
       <Data>
         <xadb2tst-import>
