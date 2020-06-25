@@ -8,7 +8,7 @@
                 sonarVersion: '6'
       }
       stage('Analyse JUnit'){
-            junit 'TTTReport/JUnitReport.xml'
+            junit 'TTTUnit/*.xml'
       }
       //folderPath: 'EmployeeTest/ListOperation/Scenarios/', 
       stage("SonarQube Import"){
@@ -38,7 +38,7 @@
       }
     }catch (e) {
         echo 'This will run only if failed'
-        junit 'TTTReport/JUnitReport.xml'
+        junit 'TTTUnit/*.xml'
         // Since we're catching the exception in order to report on it,
         // we need to re-throw it, to ensure that the build is marked as failed
         throw e
