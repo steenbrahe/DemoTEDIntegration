@@ -1,4 +1,5 @@
   node {  
+  stages{
       stage('Execute non-virtualized test cases') {
               totaltest credentialsId: 'CWCC', 
                 environmentId: '5b5f2a71787be73b59238d7b', 
@@ -35,4 +36,5 @@
       }
       stage("Deploy"){
       }
+    }
   }
