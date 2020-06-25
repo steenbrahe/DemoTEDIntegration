@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {  
       stage('Execute non-virtualized test cases') {
-          step{
+          steps{
               totaltest credentialsId: 'CWCC', 
                 environmentId: '5b5f2a71787be73b59238d7b', 
                 folderPath: '', 
@@ -11,13 +11,13 @@ pipeline {
           }
       }
       stage('Analyse JUnit'){
-          step{
+        steps{
             junit 'TTTReport/JUnitReport.xml'
-          }
+        }
       }
       //folderPath: 'EmployeeTest/ListOperation/Scenarios/', 
       stage("SonarQube Import"){
-        step{
+        steps{
             // Requires SonarQube Scanner 2.8+
             // scannerhome = sonar scanner install in global tool config
             // SonarQubeEnv = sonarqube config name in  setting config
@@ -42,7 +42,7 @@ pipeline {
         }
       }
       stage("Deploy"){
-        step{
+        steps{
         }
       }
   }
