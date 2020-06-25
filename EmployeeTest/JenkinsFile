@@ -1,23 +1,16 @@
-//pipeline {
-  //agent any
   node {  
       stage('Execute non-virtualized test cases') {
-          //steps{
               totaltest credentialsId: 'CWCC', 
                 environmentId: '5b5f2a71787be73b59238d7b', 
                 folderPath: '', 
                 serverUrl: 'http://cwcc.compuware.com:2020/', 
                 sonarVersion: '6'
-          //}
       }
       stage('Analyse JUnit'){
-       // steps{
             junit 'TTTReport/JUnitReport.xml'
-        //}
       }
       //folderPath: 'EmployeeTest/ListOperation/Scenarios/', 
       stage("SonarQube Import"){
-        //steps{
             // Requires SonarQube Scanner 2.8+
             // scannerhome = sonar scanner install in global tool config
             // SonarQubeEnv = sonarqube config name in  setting config
@@ -39,11 +32,7 @@
                 parameters      += " -Dsonar.sources=EmployeeTest/COBOL"
                 bat "${scannerHome}/bin/sonar-scanner" + parameters
             }
-        //}
       }
       stage("Deploy"){
-        //steps{
-        //}
       }
   }
-//}
