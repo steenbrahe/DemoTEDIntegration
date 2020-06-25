@@ -1,5 +1,5 @@
   node {  
-  
+    try {
       stage('Execute non-virtualized test cases') {
               totaltest credentialsId: 'CWCC', 
                 environmentId: '5b5f2a71787be73b59238d7b', 
@@ -36,5 +36,15 @@
       }
       stage("Deploy"){
       }
+    }catch (e) {
+        echo 'This will run only if failed'
+        junit 'TTTReport/JUnitReport.xml'
+        // Since we're catching the exception in order to report on it,
+        // we need to re-throw it, to ensure that the build is marked as failed
+        throw e
+    
+    }finally{
+        echo 'finally block'
+    }
     
   }
