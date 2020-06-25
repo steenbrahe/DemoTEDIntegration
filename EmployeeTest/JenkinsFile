@@ -1,0 +1,42 @@
+pipeline {
+  agent any
+
+  stage('Execute non-virtualized test cases') {
+      
+      totaltest credentialsId: 'CWCC', 
+        environmentId: '5b5f2a71787be73b59238d7b', 
+        folderPath: '', 
+        serverUrl: 'http://cwcc.compuware.com:2020/', 
+        sonarVersion: '6'
+  }
+  stage('Analyse JUnit'){
+      junit 'TTTReport/JUnitReport.xml'
+  }
+  //folderPath: 'EmployeeTest/ListOperation/Scenarios/', 
+  stage("SonarQube Import"){
+    // Requires SonarQube Scanner 2.8+
+    // scannerhome = sonar scanner install in global tool config
+    // SonarQubeEnv = sonarqube config name in  setting config
+    def scannerHome = tool name: 'scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+    //def out = getBinding().out;
+    //out.println('scannerHome:'+scannerHome);
+    def sqServerName = 'localhost'
+    def projectName  = 'SteenTest'
+    def sonarProjectName = 'SteenTest'
+    // -Dsonar.projectName=${SQ_Project} -Dsonar.projectVersion=1.0"
+    withSonarQubeEnv("${sqServerName}")
+    {
+        // Run SonarQube Scanner
+        def parameters   = " -Dsonar.tests=EmployeeTest/Tests" 
+        parameters      += " -Dsonar.testExecutionReportPaths=TTTReport/SonarTestReport.xml"
+        parameters      += " -Dsonar.projectKey=SteenTest"
+        parameters      += " -Dsonar.import_unknown_files=true"
+        parameters      += " -Dsonar.cobol.file.suffixes=cob,cbl,testsuite,testscenario,stub,xares,result,suiteresult -Dsonar.cobol.copy.suffixes=cpy -Dsonar.sourceEncoding=UTF-8";
+        parameters      += " -Dsonar.sources=EmployeeTest/COBOL"
+        bat "${scannerHome}/bin/sonar-scanner" + parameters
+    }
+      
+  }
+  stage("Deploy"){
+  }
+}
