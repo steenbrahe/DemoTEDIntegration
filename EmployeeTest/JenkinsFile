@@ -31,7 +31,7 @@
                 parameters      += " -Dsonar.import_unknown_files=true"
                 parameters      += " -Dsonar.cobol.file.suffixes=cob,cbl,testsuite,testscenario,stub,xares,result,suiteresult -Dsonar.cobol.copy.suffixes=cpy -Dsonar.sourceEncoding=UTF-8";
                 parameters      += " -Dsonar.sources=EmployeeTest/COBOL"
-                bat "${scannerHome}/bin/sonar-scanner" + parameters
+                bat "\"${scannerHome}\bin\sonar-scanner\"" + parameters
             }
       }
       stage("Deploy"){
